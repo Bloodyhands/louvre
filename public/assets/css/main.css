@@ -1,0 +1,35 @@
+body
+{
+    background-image: url("/assets/fond_louvre.jpg");
+    background-repeat: no-repeat center center;
+    background-size: cover;
+
+}
+h2
+{
+    margin-top: 50px;
+}
+h4
+{
+    color: white;
+}
+#carouselExampleIndicators
+{
+    margin-top: 50px;
+    border: 2px solid black;
+}
+footer
+{
+    margin-top: 160px;
+
+}
+footer nav
+{
+    display: flex;
+    justify-content: center;
+    background-color: #1a1a1a;
+}
+footer nav a
+{
+    color: white;
+}

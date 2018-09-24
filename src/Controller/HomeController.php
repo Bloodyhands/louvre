@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TicketingController extends AbstractController
+class HomeController extends AbstractController
 {
     /**
      * @Route("/ticketing", name="ticketing")
@@ -13,7 +13,7 @@ class TicketingController extends AbstractController
     public function index()
     {
         return $this->render('ticketing/index.html.twig', [
-            'controller_name' => 'TicketingController',
+            'controller_name' => 'HomeController',
         ]);
     }
 

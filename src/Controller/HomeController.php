@@ -8,11 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/ticketing", name="ticketing")
+     * @Route("/partials", name="partials")
      */
     public function index()
     {
-        return $this->render('ticketing/index.html.twig', [
+        return $this->render('/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
@@ -22,6 +22,22 @@ class HomeController extends AbstractController
      */
     public function home()//fonction d'accès à la page d'accueil
     {
-        return $this->render('ticketing/home.html.twig', ['title' => "Bienvenue sur le site du Louvre"]);
+        return $this->render('/home.html.twig', ['title' => "Bienvenue sur le site du Louvre"]);
+    }
+
+    /**
+     * @Route("/time", name="time")
+     */
+    public function time() //fonction d'accès à la page horaires
+    {
+        return $this->render('/home.html.twig');
+    }
+
+    /**
+     * @Route("/price", name="price")
+     */
+    public function price() //fonction d'accès à la page tarifs
+    {
+        return $this->render('/home.html.twig');
     }
 }

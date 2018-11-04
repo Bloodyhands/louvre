@@ -17,7 +17,15 @@ body
 }
 h2
 {
-    margin-top: 50px;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    color: white;
+}
+h3
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: white;
 }
 h4
 {
@@ -25,23 +33,46 @@ h4
 }
 #carouselExampleIndicators
 {
-    margin-top: 50px;
+    margin-bottom: 40px;
     border: 2px solid black;
     height: 414px;
-    width: 100%;
+    width: 600px;
 }
-footer
+#time, #contact
 {
-    margin-top: 160px;
-
+    background-color: #303030;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
-footer nav
+#price
 {
-    display: flex;
-    justify-content: center;
-    background-color: #1a1a1a;
+    background-color: #303030;
 }
-footer nav a
+#booking
+{
+    margin-top: 80px;
+}
+#card
+{
+    margin: 10px;
+    border-radius: 10px;
+}
+#home-text
+{
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-bottom: 80px;
+}
+#monBouton
+{
+    font-size: 2em;
+}
+#footer
+{
+    margin-top: 100px;
+}
+#footer nav a
 {
     color: white;
 }
+

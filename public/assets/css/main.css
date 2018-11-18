@@ -38,19 +38,15 @@ h4
     height: 414px;
     width: 600px;
 }
-#time, #contact
+#contact, #time, #price
 {
     background-color: #303030;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-#price
-{
-    background-color: #303030;
+    margin-top: 100px;
 }
 #booking
 {
-    margin-top: 80px;
+    margin-top: 200px;
+    margin-bottom: 200px;
 }
 #card
 {
@@ -59,9 +55,7 @@ h4
 }
 #home-text
 {
-    border-radius: 10px;
-    margin-top: 40px;
-    margin-bottom: 80px;
+    margin-top: 50px;
 }
 #monBouton
 {
@@ -69,7 +63,7 @@ h4
 }
 #footer
 {
-    margin-top: 100px;
+    margin-top: 10px;
 }
 #footer nav a
 {

@@ -29,15 +29,7 @@ class BookingController extends AbstractController
      */
     public function reservations(Request $request, ObjectManager $manager)//fonction d'accès et de création des réservations
     {
-        $booking = new Booking();
 
-        $form = $this->createFormBuilder($booking)
-                    ->add('email')
-                    ->add('order_date')
-                    ->add('total_price')
-                    ->getForm();
-
-        return $this->render('booking/booking.html.twig', ['formBooking' => $form->createView()]);
     }
 
 }

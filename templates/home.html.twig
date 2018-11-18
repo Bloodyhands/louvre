@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <div id="home" class="row justify-content-sm-center">
+        <div class="col-sm-12">
+            <h2 class="text-center font-italic font-weight-bold">Bienvenue sur le site de réservation en ligne du Louvre</h2>
+        </div>
+    </div>
+
+    {% include 'partials/carousel.html.twig' %}
+
+    <div id="home-text" class="row justify-content-sm-center bg-primary text-white p-3">
+        <div class="col-sm-12 text-center">
+            <p>Bienvenue sur le site de réservation en ligne du Louvre. Ici, vous pourrez retrouver les dernières actualités du musée, les horaires d'ouverture ainsi que les tarifs de réservation. Un formulaire en ligne vous permettra de réserver vos tickets d'entrée. Bonne visite sur notre site!</p>
+        </div>
+    </div>
+
+    {% include 'partials/time.html.twig' %}
+
+    {% include 'partials/price.html.twig' %}
+
+    {% include 'partials/contact.html.twig' %}
+
+    <div id="booking" class="row justify-content-center">
+        <div class="col-sm-12 text-center">
+            <a href="{{ path('booking') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Réservation en ligne</a>
+        </div>
+        <div class="col-sm-12 text-right">
+            <i class="fas fa-arrow-circle-up" id="monBouton"></i>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+

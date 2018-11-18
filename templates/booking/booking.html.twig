@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div id="home" class="row justify-content-sm-center">
+        <div class="col-sm-12">
+            <h2 class="text-center font-italic font-weight-bold">Réservation en ligne</h2>
+        </div>
+    </div>
+
+    <div class="row justify-content-sm-center">
+        <div class="col-sm-10">
+            <div id="calendarMain" class="calendarMain"></div>
+            {% block javascripts %}
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var myCalendar = new jsSimpleDatePickr();
+                    myCalendar.CalAdd({
+                        'divId': 'calendarMain',
+                        'dateMask': 'JJ/MM/AAAA',
+                        'dateCentury': 20,
+                        'titleMask': 'M AAAA',
+                        'navType': '01',
+                        'classTable': 'jsCalendar',
+                        'classDay': 'day',
+                        'classDaySelected': 'selectedDay',
+                        'monthLst': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                        'dayLst': ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                        'hideOnClick': false,
+                        'showOnLaunch': false
+                    });
+                    //]]>
+                </script>
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="row justify-content-sm-center">
+        {{ form(formBooking) }}
+    </div>
+
+{% endblock %}

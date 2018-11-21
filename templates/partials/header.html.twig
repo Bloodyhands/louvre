@@ -11,19 +11,19 @@
                 <div class="collapse navbar-collapse" id="navbarColor03">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link" href="#home">Accueil<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{% if homepage is defined %}#home{% else %}{{ path('home') }}{% endif %}">Accueil<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#time">Horaires</a>
+                            <a class="nav-link" href="{% if homepage is not defined %}{{ path('time') }}#time{% else %}#time{% endif %}">Horaires</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#price">Tarifs</a>
+                            <a class="nav-link" href="{% if homepage is not defined %}{{ path('price') }}#price{% else %}#price{% endif %}">Tarifs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
+                            <a class="nav-link" href="{% if homepage is not defined %}{{ path('contact') }}#contact{% else %}#contact{% endif %}">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#booking">Réservation en ligne</a>
+                            <a class="nav-link" href="{% if homepage is not defined %}{{ path('booking') }}#booking{% else %}#booking{% endif %}">Réservation</a>
                         </li>
                     </ul>
                 </div>

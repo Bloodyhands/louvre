@@ -23,15 +23,15 @@ class Booking
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $tickets_number;
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	private $reservation_date;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $order_date;
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	private $created_at;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2)
@@ -65,26 +65,14 @@ class Booking
         return $this;
     }
 
-    public function getTicketsNumber(): ?int
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->tickets_number;
+        return $this->created_at;
     }
 
-    public function setTicketsNumber(int $tickets_number): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
-        $this->tickets_number = $tickets_number;
-
-        return $this;
-    }
-
-    public function getOrderDate(): ?\DateTimeInterface
-    {
-        return $this->order_date;
-    }
-
-    public function setOrderDate(\DateTimeInterface $order_date): self
-    {
-        $this->order_date = $order_date;
+        $this->created_at = $created_at;
 
         return $this;
     }
@@ -100,6 +88,18 @@ class Booking
 
         return $this;
     }
+
+	public function getReservationDate(): ?\DateTimeInterface
+	{
+		return $this->reservation_date;
+	}
+
+	public function setReservationDate(\DateTimeInterface $reservation_date): self
+	{
+		$this->reservation_date = $reservation_date;
+
+		return $this;
+	}
 
     /**
      * @return Collection|Ticket[]

@@ -37,11 +37,6 @@ class Ticket
     private $birthday_date;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $reserved_date;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $type;
@@ -101,18 +96,6 @@ class Ticket
     public function setBirthdayDate(\DateTimeInterface $birthday_date): self
     {
         $this->birthday_date = $birthday_date;
-
-        return $this;
-    }
-
-    public function getReservedDate(): ?\DateTimeInterface
-    {
-        return $this->reserved_date;
-    }
-
-    public function setReservedDate(\DateTimeInterface $reserved_date): self
-    {
-        $this->reserved_date = $reserved_date;
 
         return $this;
     }

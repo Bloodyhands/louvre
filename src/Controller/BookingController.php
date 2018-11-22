@@ -2,28 +2,17 @@
 
 namespace App\Controller;
 
+use App\Form\BookingType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\Booking;
+use App\Entity\Ticket;
+use Doctrine\Common\Persistence\ObjectManager;
 
 
 class BookingController extends AbstractController
 {
-    /**
-     * @Route("/reservations", name="reservations")
-     */
-    public function index()
-    {
-        return $this->render('booking/index.html.twig', [
-            'controller_name' => 'BookingController',
-        ]);
-    }
-
     /**
      * @Route("/booking", name="booking")
      */
@@ -31,13 +20,26 @@ class BookingController extends AbstractController
     {
         $booking = new Booking();
 
-        $form = $this->createFormBuilder($booking)
-                    ->add('email')
-                    ->add('order_date')
-                    ->add('total_price')
-                    ->getForm();
+        $ticket1 = new Ticket();
+        $ticket1->setName('ticket1');
+        $booking->getTickets()->add($ticket1);
 
-        return $this->render('booking/booking.html.twig', ['formBooking' => $form->createView()]);
+        $form = $this->createForm(BookingType::class, $booking);
+
+        $form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()){
+			foreach ($booking->getTickets() as $ticket) {
+				$ticket->setBooking($booking);
+				$manager->persist($ticket);
+			}
+
+			$manager->persist($booking);
+			$manager->flush();
+		}
+
+		return $this->render('booking/booking.html.twig', array(
+			'form' => $form->createView()
+		));
     }
-
 }

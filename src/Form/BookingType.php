@@ -18,7 +18,10 @@ class BookingType extends AbstractType
 
 		$builder->add('tickets', CollectionType::class, array(
 			'entry_type' => TicketType::class,
-			'entry_options' => array('label' => false)
+			'entry_options' => array('label' => false),
+			'allow_add' => true,
+			'by_reference' => false,
+			'allow_delete' => true
 		));
 	}
 

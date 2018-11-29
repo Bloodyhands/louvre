@@ -111,12 +111,9 @@ class Booking
 
     public function addTicket(Ticket $ticket): self
     {
-        if (!$this->tickets->contains($ticket)) {
-            $this->tickets[] = $ticket;
-            $ticket->setBooking($this);
-        }
+        $ticket->setBooking($this);
 
-        return $this;
+        $this->tickets->add($ticket);
     }
 
     public function removeTicket(Ticket $ticket): self

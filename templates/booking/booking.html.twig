@@ -15,7 +15,7 @@
     {{ form_start(form) }}
 
     <h3>Tickets</h3>
-    <ul class="tickets">
+    <ul class="tickets" data-prototype="{{ form_widget(form.tickets.vars.prototype)|e('html_attr') }}">
         {% for ticket in form.tickets %}
         <li>{{ form_row(ticket.name) }}</li>
         <li>{{ form_row(ticket.firstname) }}</li>
@@ -24,6 +24,11 @@
         <li>{{ form_row(ticket.type) }}</li>
         {% endfor %}
     </ul>
+
     {{ form_end(form) }}
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/booking.js"></script>
 {% endblock %}

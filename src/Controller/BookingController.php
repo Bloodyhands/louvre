@@ -37,7 +37,6 @@ class BookingController extends AbstractController
 			$manager->persist($booking);
 			$manager->flush();
 		}
-
 		return $this->render('booking/booking.html.twig', array(
 			'form' => $form->createView()
 		));

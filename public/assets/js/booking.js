@@ -1,9 +1,9 @@
 $('#add-ticket').click(function(){
 	//je récupère le numero des futurs champs que je vais créer en ajoutant +1 à l'index à chaque fois que l'on rajoute un ticket (même si une ticket est enlevé)
 	const index = +$('#widgets-counter').val();
-console.log(index);
+
 	//je récupère le prototype des entrées
-	const tmpl = $('#tickets').data('prototype').replace(/__name__/g, index);
+	const tmpl = $('#booking_tickets').data('prototype').replace(/__name__/g, index);
 
 	//J'injecte ce code au sein de la div
 	$('#booking_tickets').append(tmpl);

@@ -20,10 +20,6 @@ class BookingController extends AbstractController
     {
         $booking = new Booking();
 
-        $ticket1 = new Ticket();
-        $ticket1->setName('ticket1');
-        $booking->getTickets()->add($ticket1);
-
         $form = $this->createForm(BookingType::class, $booking);
 
         $form->handleRequest($request);

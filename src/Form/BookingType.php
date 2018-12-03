@@ -43,9 +43,11 @@ class BookingType extends AbstractType
 				  [
 				  'format' => 'dd-MM-yyyy'
 				  ])
-			->add('tickets', CollectionType::class, array(
+			->add('tickets',
+				  CollectionType::class, array(
 					'entry_type' => TicketType::class,
-					'allow_add' => true
+					'allow_add' => true,
+					'allow_delete' => true
 		));
 	}
 

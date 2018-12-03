@@ -43,7 +43,7 @@ class TicketType extends AbstractType
 				)
 			->add('country',
 				ChoiceType::class,
-				$this->getConfiguration("Pays", "")
+				$this->getConfiguration("Pays", "Sélectionnez votre pays")
 				)
 			->add('birthday_date',
 				DateType::class,
@@ -51,7 +51,7 @@ class TicketType extends AbstractType
 			)
 			->add('type',
 				CheckboxType::class,
-				$this->getConfiguration("Tarifs réduits","Cochez si vous êtes étudiants")
+				$this->getConfiguration("Tarifs réduits","")
 			)
 		;
 	}

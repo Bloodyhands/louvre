@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
@@ -110,25 +112,25 @@ class Booking
     }
 
     public function addTicket(Ticket $ticket): self
-    {
-        if (!$this->tickets->contains($ticket)) {
-            $this->tickets[] = $ticket;
-            $ticket->setBooking($this);
-        }
+	{
+		if (!$this->tickets->contains($ticket)) {
+			$this->tickets[] = $ticket;
+			$ticket->setBooking($this);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
     public function removeTicket(Ticket $ticket): self
-    {
-        if ($this->tickets->contains($ticket)) {
-            $this->tickets->removeElement($ticket);
-            // set the owning side to null (unless already changed)
-            if ($ticket->getBooking() === $this) {
-                $ticket->setBooking(null);
-            }
-        }
+	{
+		if ($this->tickets->contains($ticket)) {
+			$this->tickets->removeElement($ticket);
+			// set the owning side to null (unless already changed)
+			if ($ticket->getBooking() === $this) {
+				$ticket->setBooking(null);
+			}
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 }

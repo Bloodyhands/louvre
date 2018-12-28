@@ -1,29 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
+{% block title %}Création d'une commande{% endblock %}
 
-{% endblock %}
+{% form_theme form 'booking/_collection.html.twig' %} {#_self représente le fichier actuel#}
 
 {% block body %}
 
-    <div id="home" class="row justify-content-sm-center">
-        <div class="col-sm-12">
-            <h2 class="text-center font-italic font-weight-bold">Réservation en ligne</h2>
-        </div>
-    </div>
+	<div class="container">
+		{{ form_start(form) }}
+		<div class="col-12 text-center">
+			<h2>Réservations des billets</h2>
+		</div>
+		<div class="row alert alert-secondary">
+			<div class="col-8">
+				{{ form_row(form.reservation_date) }}
+			</div>
+			<div class="col-4">
+				{{ form_row(form.email) }}
+			</div>
+			<div class="col-12">
+				{{ form_row(form.tickets) }}
+			</div>
+			<div class="col-12 text-center">
+				<button type="submit" class="btn btn-primary">Commander</button>
+			</div>
+		</div>
+		{{ form_end(form) }}
+	</div>
 
-    {{ form_start(form) }}
+{% endblock %}
 
-    <h3>Tickets</h3>
-    <ul class="tickets">
-        {% for ticket in form.tickets %}
-        <li>{{ form_row(ticket.name) }}</li>
-        <li>{{ form_row(ticket.firstname) }}</li>
-        <li>{{ form_row(ticket.country) }}</li>
-        <li>{{ form_row(ticket.birthday_date) }}</li>
-        <li>{{ form_row(ticket.type) }}</li>
-        {% endfor %}
-    </ul>
-    {{ form_end(form) }}
+{% block javascripts %}
+	<script src="{{ asset('js/booking.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.fr.min.js"></script>
 
+	<script>
+		$.fn.datepicker.dates['fr'] = {
+			days: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+			daysShort: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+			daysMin: ["Lu", "Ma", "Me", "Je", "Ve", "Sa", "Di"],
+			months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+			monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Jui", "Aoû", "Sep", "Oct", "Nov", "Dec"],
+			today: "today",
+			clear: "Clear",
+			format: "dd/mm/yyyy",
+			titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+			weekStart: 0
+		};
+
+		$(document).ready(function(){
+			$('#booking_reservation_date, .birthday').datepicker({
+				language: 'fr',
+				format:'dd/mm/yyyy',
+				startDate: 'today'
+			});
+		});
+
+	</script>
 {% endblock %}

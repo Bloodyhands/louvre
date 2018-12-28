@@ -10,6 +10,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Ticket
 {
+	const NORMAL = 16;
+	const CHILDREN = 8;
+	const SENIOR = 12;
+	const REDUCE = 10;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -47,6 +52,11 @@ class Ticket
      * @ORM\JoinColumn(nullable=false)
      */
     private $booking;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
 
     public function getId(): ?int
     {
@@ -121,6 +131,30 @@ class Ticket
     public function setBooking(?Booking $booking): self
     {
         $this->booking = $booking;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getReduce(): ?bool
+    {
+        return $this->reduce;
+    }
+
+    public function setReduce(?bool $reduce): self
+    {
+        $this->reduce = $reduce;
 
         return $this;
     }

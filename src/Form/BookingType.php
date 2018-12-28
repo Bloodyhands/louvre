@@ -3,16 +3,23 @@
 namespace App\Form;
 
 use App\Entity\Booking;
-use App\Form\TicketType;
 use Symfony\Component\Form\AbstractType;
+use App\Form\TicketType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use App\Form\DataTransformer\FrenchToDateTimeTransformer;
 
 class BookingType extends AbstractType
 {
+	public function __construct(FrenchToDateTimeTransformer $transformer)
+	{
+		$this->transformer = $transformer;
+	}
+
 	/**
 	 * Permet d'avoir la configuration de base d'un champ
 	 *
@@ -34,12 +41,12 @@ class BookingType extends AbstractType
 	{
 		$builder
 			->add('email',
-				  TextType::class,
-				  $this->getConfiguration("Email de réception des tickets", "Tapez email valide")
+				  EmailType::class,
+				  $this->getConfiguration("Email de réception des billets", "Tapez email valide")
 			)
 			->add('reservation_date',
-				  DateType::class,
-				  $this->getConfiguration("date de réservation", ""),
+				  TextType::class,
+				  $this->getConfiguration("Date de réservation", ""),
 				  [
 				  'format' => 'dd-MM-yyyy'
 				  ])
@@ -49,6 +56,8 @@ class BookingType extends AbstractType
 					'allow_add' => true,
 					'allow_delete' => true
 		));
+
+		$builder->get('reservation_date')->addModelTransformer($this->transformer);
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

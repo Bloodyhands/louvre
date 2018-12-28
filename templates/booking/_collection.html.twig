@@ -5,7 +5,7 @@
     <input type="hidden" id="widgets-counter" value="0" xmlns="http://www.w3.org/1999/html">
 
     <div class="form-group">
-        <button type="button" id="add-ticket" class="btn btn-primary">Ajouter un ticket</button>
+        <button type="button" id="add-ticket" class="btn btn-primary">Ajouter un billet</button>
     </div>
 {% endblock %}
 
@@ -16,7 +16,7 @@
     <div class="form-group" id="block_{{ id }}">
         <div class="row">
             <div class="col-11">
-                <div class="card border-secondary">
+                <div class="card text-white bg-primary border-primary">
                     <div class="card-body">
                         <div class="row">
                             <p class="card-text">
@@ -36,7 +36,7 @@
                             </p>
                             <p class="card-text">
                             <div class="col-4 mt-2">
-                                {{ form_row(form.birthday_date) }}
+                                {{ form_row(form.birthday_date, {'attr': {'class': 'birthday'}}) }}
                             </div>
                             </p>
                             <p class="card-text">

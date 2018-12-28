@@ -3,16 +3,22 @@
 namespace App\Form;
 
 use App\Entity\Ticket;
-use Symfony\component\Form\AbstractType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Form\DataTransformer\FrenchToDateTimeTransformer;
 
 class TicketType extends AbstractType
 {
+	public function __construct(FrenchToDateTimeTransformer $transformer)
+	{
+		$this->transformer = $transformer;
+	}
+
 	/**
 	 * Permet d'avoir la configuration de base d'un champ
 	 *
@@ -42,18 +48,23 @@ class TicketType extends AbstractType
 				$this->getConfiguration("Prénom", "Tapez votre prénom")
 				)
 			->add('country',
-				ChoiceType::class,
-				$this->getConfiguration("Pays", "Sélectionnez votre pays")
+				CountryType::class,
+				$this->getConfiguration("Pays", "Sélectionnez votre pays"),
+				  array("preferred_choices" => array("France")
+				  )
 				)
 			->add('birthday_date',
-				DateType::class,
-				$this->getConfiguration("Date de naissance", "")
-			)
+				TextType::class,
+				$this->getConfiguration("Date de naissance", ""),
+				  [
+					  'format' => 'dd-MM-yyyy'
+				  ])
 			->add('type',
 				CheckboxType::class,
-				$this->getConfiguration("Tarifs réduits","")
-			)
-		;
+				$this->getConfiguration("Tarifs réduits (étudiants, militaires, employé ministère de la culture)","")
+			);
+
+		$builder->get('birthday_date')->addModelTransformer($this->transformer);
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

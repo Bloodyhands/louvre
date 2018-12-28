@@ -27,6 +27,8 @@ class BookingController extends AbstractController
 		if ($form->isSubmitted() && $form->isValid()){
 			foreach ($booking->getTickets() as $ticket) {
 				$ticket->setBooking($booking);
+				$booking->addTicket($ticket);
+				//$ticket->setType(Ticket::NORMAL);
 				$manager->persist($ticket);
 			}
 

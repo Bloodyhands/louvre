@@ -53,18 +53,20 @@ class TicketType extends AbstractType
 				  array("preferred_choices" => array("France")
 				  )
 				)
-			->add('birthday_date',
+			->add('birthdayDate',
 				TextType::class,
 				$this->getConfiguration("Date de naissance", ""),
 				  [
 					  'format' => 'dd-MM-yyyy'
 				  ])
-			->add('type',
-				CheckboxType::class,
-				$this->getConfiguration("Tarifs réduits (étudiants, militaires, employé ministère de la culture)","")
+			->add('reducePrice',
+				  CheckboxType::class,
+				$this->getConfiguration("Tarifs réduits (étudiants, militaires, employé ministère de la culture)","", [
+					"required"=>false
+				])
 			);
 
-		$builder->get('birthday_date')->addModelTransformer($this->transformer);
+		$builder->get('birthdayDate')->addModelTransformer($this->transformer);
 	}
 
 	public function configureOptions(OptionsResolver $resolver)

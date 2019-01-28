@@ -38,14 +38,14 @@ class Ticket
     private $country;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", name="birthday_date")
      */
-    private $birthday_date;
+    private $birthdayDate;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="reducePrice")
      */
-    private $type;
+    private $reducePrice;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Booking", inversedBy="tickets")
@@ -99,30 +99,6 @@ class Ticket
         return $this;
     }
 
-    public function getBirthdayDate(): ?\DateTimeInterface
-    {
-        return $this->birthday_date;
-    }
-
-    public function setBirthdayDate(\DateTimeInterface $birthday_date): self
-    {
-        $this->birthday_date = $birthday_date;
-
-        return $this;
-    }
-
-    public function getType(): ?int
-    {
-        return $this->type;
-    }
-
-    public function setType(int $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
     public function getBooking(): ?Booking
     {
         return $this->booking;
@@ -147,14 +123,26 @@ class Ticket
         return $this;
     }
 
-    public function getReduce(): ?bool
+    public function getBirthdayDate(): ?\DateTimeInterface
     {
-        return $this->reduce;
+        return $this->birthdayDate;
     }
 
-    public function setReduce(?bool $reduce): self
+    public function setBirthdayDate(\DateTimeInterface $birthdayDate): self
     {
-        $this->reduce = $reduce;
+        $this->birthdayDate = $birthdayDate;
+
+        return $this;
+    }
+
+    public function getReducePrice(): ?int
+    {
+        return $this->reducePrice;
+    }
+
+    public function setReducePrice(int $reducePrice): self
+    {
+        $this->reducePrice = $reducePrice;
 
         return $this;
     }

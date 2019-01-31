@@ -30,3 +30,5 @@ framework:
     #app: cache.adapter.apcu
     assets:
         base_path: '/assets'
+
+    validation: { enable_annotations: true }

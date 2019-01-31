@@ -15,6 +15,10 @@ body
 {
     flex: 1;
 }
+#navbar-menu
+{
+    font-size: 20px;
+}
 h2
 {
     margin-top: 200px;
@@ -53,15 +57,16 @@ h4
 #card
 {
     margin: 10px;
-    border-radius: 10px;
+    font-size: 18px;
 }
 #home-text
 {
     margin-top: 50px;
+    font-size: 20px;
 }
 #monBouton
 {
-    font-size: 2em;
+    font-size: 40px;
 }
 #footer
 {

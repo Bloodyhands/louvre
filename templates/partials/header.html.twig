@@ -1,14 +1,14 @@
 <div class="container-fluid">
     <div class="row">
         <nav id="navbar-menu" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <div id="logo" class="col">
+            <div id="logo" class="col-lg-2">
                 <img src="{{ asset('93fe383.png') }}" alt="logo_louvre" />
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div id="menu" class="col-sm-8 mr-4">
-                <div class="collapse navbar-collapse" id="navbarColor03">
+            <div id="menu" class="col-lg-8">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarColor03">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
                             <a class="nav-link" href="{% if homepage is defined %}#home{% else %}{{ path('home') }}{% endif %}">Accueil<span class="sr-only">(current)</span></a>

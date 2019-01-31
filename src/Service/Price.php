@@ -3,13 +3,14 @@
 namespace App\Service;
 
 use App\Entity\Ticket;
+use App\Entity\Booking;
 
 class Price
 {
 	/**
 	 * On récupère l'âge des personnes de chaque billet
 	 *
-	 * @param \DateTime $birthdate
+	 * @param Ticket $ticket
 	 */
 	public function calculatePrice(Ticket $ticket)
 	{
@@ -30,5 +31,24 @@ class Price
 			default:
 				return 0;
 		}
+	}
+
+	/**
+	 * On récupère le prix total des billets
+	 *
+	 * @param Booking $booking
+	 */
+	public function calculateTotalPrice(Booking $booking)
+	{
+		$total = 0;
+		foreach ($booking->getTickets() as $ticket) {
+			$total += $this->calculatePrice($ticket);
+		}
+
+		if ($booking->getDayType() == true) {
+			$total = $total / 2;
+		}
+
+		return $total;
 	}
 }

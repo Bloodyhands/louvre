@@ -22,32 +22,50 @@ class Booking
 
     /**
      * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Email(
+	 *     message = "Cet email n'est pas valide",
+	 *     checkMX = true
+	 * )
      */
     private $email;
 
 	/**
 	 * @ORM\Column(type="datetime")
+	 *
+	 * @Assert\NotNull
+	 * @Assert\GreaterThan("today", message="La date de réservation est antérieure à aujourd'hui")
+	 *
 	 */
-	private $reservation_date;
+	private $reservationDate;
 
 	/**
 	 * @ORM\Column(type="datetime")
 	 */
-	private $created_at;
+	private $createdAt;
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2)
      */
-    private $total_price;
+    private $totalPrice;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="booking", orphanRemoval=true)
+	 *
+	 * @Assert\NotNull
      */
     private $tickets;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $dayType;
 
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->created_at = new \DateTime();
     }
 
     public function getId(): ?int
@@ -69,39 +87,39 @@ class Booking
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getTotalPrice()
     {
-        return $this->total_price;
+        return $this->totalPrice;
     }
 
-    public function setTotalPrice($total_price): self
+    public function setTotalPrice($totalPrice): self
     {
-        $this->total_price = $total_price;
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }
 
 	public function getReservationDate(): ?\DateTimeInterface
-	{
-		return $this->reservation_date;
-	}
+         	{
+         		return $this->reservationDate;
+         	}
 
-	public function setReservationDate(\DateTimeInterface $reservation_date): self
-	{
-		$this->reservation_date = $reservation_date;
-
-		return $this;
-	}
+	public function setReservationDate(\DateTimeInterface $reservationDate): self
+         	{
+         		$this->reservationDate = $reservationDate;
+         
+         		return $this;
+         	}
 
     /**
      * @return Collection|Ticket[]
@@ -133,4 +151,16 @@ class Booking
 
 		return $this;
 	}
+
+    public function getDayType(): ?bool
+    {
+        return $this->dayType;
+    }
+
+    public function setDayType(bool $dayType): self
+    {
+        $this->dayType = $dayType;
+
+        return $this;
+    }
 }

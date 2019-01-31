@@ -24,21 +24,30 @@ class Ticket
 
     /**
      * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\NotBlank
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\Country
      */
     private $country;
 
     /**
-     * @ORM\Column(type="datetime", name="birthday_date")
+     * @ORM\Column(type="datetime")
+	 *
+	 * @Assert\LessThan("today")
+	 *
      */
     private $birthdayDate;
 

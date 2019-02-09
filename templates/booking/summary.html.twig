@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Récapitulatif de la commande{% endblock %}
+{% block title %}Réservation n°{{ booking.id }}{% endblock %}
 
 {% block body %}
-
+{{ dump(booking.tickets) }}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12 text-center">
@@ -12,14 +12,22 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-12">
-            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                <div class="card-header">Commande du {{ ticket.name }}</div>
-                <div class="card-body">
-                    <h4 class="card-title">Primary card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Commande n°{{ booking.id }}</div>
+                    <div class="card-body">
+                        <dt class="col-lg-6">Numéro de commande</dt>
+                        <dd class="col-lg-4">{{ booking.id }}</dd>
+                        <dt class="col-lg-6">Date de réservation</dt>
+                        <dd class="col-lg-4">{{ booking.reservationDate|date('d/m/Y')}}</dd>
+                        <dt class="col-lg-6">Email de réception des billets</dt>
+                        <dd class="col-lg-4">{{ booking.email }}</dd>
+                        <dt class="col-lg-6">Nombre de tickets</dt>
+                        <dd class="col-lg-4">{{ booking.tickets|length }}</dd>
+                        <dt class="col-lg-6">Montant total de la commande</dt>
+                        <dd class="col-lg-4">{{ booking.totalPrice }}</dd>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 

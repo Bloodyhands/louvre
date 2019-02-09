@@ -7,6 +7,7 @@ use App\Service\Price;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Booking;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -39,6 +40,8 @@ class BookingController extends AbstractController
 
 			$manager->persist($booking);
 			$manager->flush();
+
+			return $this->redirectToRoute('summary', ['id' => $booking->getId()]);
 		}
 		return $this->render('booking/booking.html.twig', array(
 			'form' => $form->createView(),
@@ -47,10 +50,18 @@ class BookingController extends AbstractController
     }
 
 	/**
-	 * @Route("/booking/summary", name="summary")
+	 * Permet d'afficher le résumé de la réservation
+	 *
+	 * @Route("/booking/{id}/summary", name="summary")
+	 *
+	 * @param Booking $booking
+	 * @return Response
 	 */
-    public function summary()//fonction d'accès au récapitulatif des informations de réservations avant paiement
+	public function summary(Booking $booking)
 	{
-		return $this->render('booking/summary.html.twig');
+		return $this->render('booking/summary.html.twig', [
+			'booking' => $booking
+	]);
 	}
+
 }

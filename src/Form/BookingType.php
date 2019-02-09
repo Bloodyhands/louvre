@@ -15,8 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use App\Form\DataTransformer\FrenchToDateTimeTransformer;
 use Symfony\Component\HttpFoundation\Session\Session ;
 
-$session = new Session();
-$session->start();
+/*$session = new Session();
+$session->start();*/
 
 class BookingType extends AbstractType
 {
@@ -51,7 +51,7 @@ class BookingType extends AbstractType
 			)
 			->add('dayType',
 					CheckboxType::class,
-					$this->getConfiguration("Cocher cette case si vous voulez réserver pour une demi-journée seulement (A partir de 14h)", "")
+					$this->getConfiguration("Cocher cette case si vous voulez réserver pour une demi-journée seulement (A partir de 14h)", "", ['required' => false])
 			)
 			->add('reservationDate',
 				  TextType::class,

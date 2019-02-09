@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Booking
 {
@@ -62,10 +64,24 @@ class Booking
      */
     private $dayType;
 
+	/**
+	 * Callback appelé à chaque fois qu'on crée une nouvelle réseravtion
+	 *
+	 * @ORM\PrePersist
+	 *
+	 * @return void
+	 */
+    public function prePersist()
+	{
+		if (empty($this->createdAt)) {
+			$this->createdAt = new \DateTime();
+		}
+	}
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
-        $this->created_at = new \DateTime();
+        $this->created_at = new DateTime();
     }
 
     public function getId(): ?int

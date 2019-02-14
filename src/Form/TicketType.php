@@ -41,29 +41,31 @@ class TicketType extends AbstractType
 		$builder
 			->add('name',
 				  TextType::class,
-				$this->getConfiguration("Nom", "Tapez votre nom")
-				)
+				  $this->getConfiguration("Nom", "Tapez votre nom")
+			)
 			->add('firstname',
 				  TextType::class,
-				$this->getConfiguration("Prénom", "Tapez votre prénom")
-				)
+				  $this->getConfiguration("Prénom", "Tapez votre prénom")
+			)
 			->add('country',
-				CountryType::class,
-				$this->getConfiguration("Pays", "Sélectionnez votre pays"),
-				  array("preferred_choices" => array("France")
-				  )
-				)
+				  CountryType::class,
+				  $this->getConfiguration("Pays", "Sélectionnez votre pays", [
+					  'preferred_choices' => [
+						  'fr'
+					  ]
+				  ])
+			)
 			->add('birthdayDate',
-				TextType::class,
-				$this->getConfiguration("Date de naissance", ""),
+				  TextType::class,
+				  $this->getConfiguration("Date de naissance", ""),
 				  [
 					  'format' => 'dd-MM-yyyy'
 				  ])
 			->add('reducePrice',
 				  CheckboxType::class,
-				$this->getConfiguration("Tarifs réduits (étudiants, militaires, employé ministère de la culture)","", [
-					"required"=>false
-				])
+				  $this->getConfiguration("Tarifs réduits (étudiants, militaires, employé ministère de la culture)","", [
+					  "required"=>false
+				  ])
 			);
 
 		$builder->get('birthdayDate')->addModelTransformer($this->transformer);
@@ -72,7 +74,7 @@ class TicketType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults([
-			'data_class' => Ticket::class
-		]);
+								   'data_class' => Ticket::class
+							   ]);
 	}
 }

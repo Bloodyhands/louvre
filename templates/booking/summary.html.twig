@@ -3,32 +3,65 @@
 {% block title %}Réservation n°{{ booking.id }}{% endblock %}
 
 {% block body %}
-{{ dump(booking.tickets) }}
+
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12 text-center">
-                <h2>Récapitulatif de la commande</h2>
+    <div class="row justify-content-center">
+        <div class="col-lg-12 text-center">
+            <h2>Récapitulatif de la commande</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
+            <div class="card-header text-center">Commande n°{{ booking.id }}</div>
+            <div class="card-body">
+                <div class="row">
+                    <dt class="col-lg-6">Créée le :</dt>
+                    <dd class="col-lg-6">{{ booking.createdAt|date('d/m/Y') }}</dd>
+                    <dt class="col-lg-6">Email de réception des billets :</dt>
+                    <dd class="col-lg-6">{{ booking.email }}</dd>
+                    <dt class="col-lg-6">Nombre de tickets :</dt>
+                    <dd class="col-lg-6">{{ booking.tickets|length }}</dd>
+                    <dt class="col-lg-6">Date de réservation :</dt>
+                    <dd class="col-lg-6">{{ booking.reservationDate|date('d/m/Y')}}</dd>
+                </div>
             </div>
         </div>
+    </div>
+
+    {% for data in booking.tickets %}
         <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                    <div class="card-header">Commande n°{{ booking.id }}</div>
-                    <div class="card-body">
-                        <dt class="col-lg-6">Numéro de commande</dt>
-                        <dd class="col-lg-4">{{ booking.id }}</dd>
-                        <dt class="col-lg-6">Date de réservation</dt>
-                        <dd class="col-lg-4">{{ booking.reservationDate|date('d/m/Y')}}</dd>
-                        <dt class="col-lg-6">Email de réception des billets</dt>
-                        <dd class="col-lg-4">{{ booking.email }}</dd>
-                        <dt class="col-lg-6">Nombre de tickets</dt>
-                        <dd class="col-lg-4">{{ booking.tickets|length }}</dd>
-                        <dt class="col-lg-6">Montant total de la commande</dt>
-                        <dd class="col-lg-4">{{ booking.totalPrice }}</dd>
+            <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
+                <div class="card-body">
+                    <div class="row">
+                        <dt class="col-lg-6">Nom/Prénom :</dt>
+                        <dd class="col-lg-6">{{ data.name|capitalize }} {{ data.firstname|capitalize }}</dd>
+                        <dt class="col-lg-6">Pays du détenteur :</dt>
+                        <dd class="col-lg-6">{{ data.country }}</dd>
+                        <dt class="col-lg-6">Date de naissance :</dt>
+                        <dd class="col-lg-6">{{ data.birthdayDate|date('d/m/Y') }}</dd>
+                        <dt class="col-lg-6">Tarif réduit :</dt>
+                        <dd class="col-lg-6">{% if data.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
+                        <dt class="col-lg-6">Prix du billet :</dt>
+                        <dd class="col-lg-6">{{ data.price }} €</dd>
                     </div>
                 </div>
             </div>
         </div>
+    {% endfor %}
+
+    <div class="row justify-content-center">
+        <div class="card text-white bg-primary" style="max-width: 40rem;">
+            <div class="card-header">
+                <div class="row">
+                    <dt class="col-lg-6">Montant total de la commande :</dt>
+                    <dd class="col-lg-6">{{ booking.totalPrice }} €</dd>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 offset-lg-4 text-center mt-5 mb-5">
+        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Paiement</a>
     </div>
 
 {% endblock %}

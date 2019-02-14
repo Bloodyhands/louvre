@@ -7,6 +7,7 @@ use App\Service\Price;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Booking;
+use App\Entity\Ticket;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -15,17 +16,17 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class BookingController extends AbstractController
 {
-    /**
-     * @Route("/booking", name="booking")
-     */
-    public function reservations(Request $request, ObjectManager $manager, Price $price)//fonction d'accès et de création des réservations
-    {
-        $booking = new Booking();
-        $createdAt = new \DateTime();
+	/**
+	 * @Route("/booking", name="booking")
+	 */
+	public function reservations(Request $request, ObjectManager $manager, Price $price)//fonction d'accès et de création des réservations
+	{
+		$booking = new Booking();
+		$createdAt = new \DateTime();
 
-        $form = $this->createForm(BookingType::class, $booking);
+		$form = $this->createForm(BookingType::class, $booking);
 
-        $form->handleRequest($request);
+		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()){
 			foreach ($booking->getTickets() as $ticket) {
@@ -42,12 +43,13 @@ class BookingController extends AbstractController
 			$manager->flush();
 
 			return $this->redirectToRoute('summary', ['id' => $booking->getId()]);
+
 		}
 		return $this->render('booking/booking.html.twig', array(
 			'form' => $form->createView(),
 			'total_price' => $price->calculateTotalPrice($booking)
 		));
-    }
+	}
 
 	/**
 	 * Permet d'afficher le résumé de la réservation
@@ -55,13 +57,15 @@ class BookingController extends AbstractController
 	 * @Route("/booking/{id}/summary", name="summary")
 	 *
 	 * @param Booking $booking
+	 * @param Ticket $ticket
 	 * @return Response
 	 */
-	public function summary(Booking $booking)
+	public function summary(Booking $booking, Ticket $ticket)
 	{
 		return $this->render('booking/summary.html.twig', [
-			'booking' => $booking
-	]);
+			'booking' => $booking,
+			'ticket' => $ticket
+		]);
 	}
 
 }

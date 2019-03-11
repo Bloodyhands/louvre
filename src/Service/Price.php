@@ -20,7 +20,6 @@ class Price
 
 		$datetime1 = new \DateTime('now');
 		$age = $datetime1->diff($ticket->getBirthdayDate())->y;
-
 		switch ($age) {
 			case ($age >= 60):
 				return Ticket::SENIOR;

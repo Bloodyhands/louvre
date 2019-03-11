@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\BookingType;
 use App\Service\Price;
+use App\Service\Payment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Booking;
@@ -30,7 +31,6 @@ class BookingController extends AbstractController
 
 		if ($form->isSubmitted() && $form->isValid()){
 			foreach ($booking->getTickets() as $ticket) {
-
 				$ticket->setBooking($booking);
 				$booking->addTicket($ticket);
 				$ticket->setPrice($price->calculatePrice($ticket));
@@ -57,15 +57,30 @@ class BookingController extends AbstractController
 	 * @Route("/booking/{id}/summary", name="summary")
 	 *
 	 * @param Booking $booking
-	 * @param Ticket $ticket
+	 *
 	 * @return Response
 	 */
-	public function summary(Booking $booking, Ticket $ticket)
+	public function summary(Booking $booking)
 	{
 		return $this->render('booking/summary.html.twig', [
-			'booking' => $booking,
-			'ticket' => $ticket
+			'booking' => $booking
 		]);
 	}
 
+	/**
+	 * Permet d'afficher la validation du paiement de la réservation
+	 *
+	 * @Route("/booking/{id}/successfull", name="successfull")
+	 *
+	 * @param Booking $booking
+	 *
+	 * @return Response
+	 */
+	public function successfull(Booking $booking, Payment $payment)
+	{
+		return $this->render('booking/successfull.html.twig', [
+			'booking' => $booking,
+			'payment' => $payment->Stripe($booking)
+		]);
+	}
 }

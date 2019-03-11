@@ -51,7 +51,7 @@ class TicketType extends AbstractType
 				  CountryType::class,
 				  $this->getConfiguration("Pays", "Sélectionnez votre pays", [
 					  'preferred_choices' => [
-						  'fr'
+						  'FR'
 					  ]
 				  ])
 			)

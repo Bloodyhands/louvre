@@ -28,21 +28,21 @@
         </div>
     </div>
 
-    {% for data in booking.tickets %}
+    {% for ticket in booking.tickets %}
         <div class="row justify-content-center">
             <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
                 <div class="card-body">
                     <div class="row">
                         <dt class="col-lg-6">Nom/Prénom :</dt>
-                        <dd class="col-lg-6">{{ data.name|capitalize }} {{ data.firstname|capitalize }}</dd>
+                        <dd class="col-lg-6">{{ ticket.name|capitalize }} {{ ticket.firstname|capitalize }}</dd>
                         <dt class="col-lg-6">Pays du détenteur :</dt>
-                        <dd class="col-lg-6">{{ data.country }}</dd>
+                        <dd class="col-lg-6">{{ ticket.country }}</dd>
                         <dt class="col-lg-6">Date de naissance :</dt>
-                        <dd class="col-lg-6">{{ data.birthdayDate|date('d/m/Y') }}</dd>
+                        <dd class="col-lg-6">{{ ticket.birthdayDate|date('d/m/Y') }}</dd>
                         <dt class="col-lg-6">Tarif réduit :</dt>
-                        <dd class="col-lg-6">{% if data.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
+                        <dd class="col-lg-6">{% if ticket.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
                         <dt class="col-lg-6">Prix du billet :</dt>
-                        <dd class="col-lg-6">{{ data.price }} €</dd>
+                        <dd class="col-lg-6">{{ ticket.price }} €</dd>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,19 @@
     </div>
 
     <div class="col-lg-4 offset-lg-4 text-center mt-5 mb-5">
-        <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Paiement</a>
+        <form action="{{ path('successfull', {'id':booking.id}) }}" method="POST">
+          <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_gapbieEbFwHnE34ymYWxqfGE"
+            data-amount="{{ booking.totalPrice * 100 }}"
+            data-name="Paiement des billets"
+            data-image="{{ asset('icone_louvre.jpg') }}"
+            data-locale="fr"
+            data-currency="eur"
+            data-email="{{ booking.email }}"
+            data-label="Payer">
+          </script>
+        </form>
     </div>
 
 {% endblock %}

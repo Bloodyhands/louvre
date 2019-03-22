@@ -126,16 +126,16 @@ class Booking
     }
 
 	public function getReservationDate(): ?\DateTimeInterface
-         	{
-         		return $this->reservationDate;
-         	}
+                  	{
+                  		return $this->reservationDate;
+                  	}
 
 	public function setReservationDate(\DateTimeInterface $reservationDate): self
-         	{
-         		$this->reservationDate = $reservationDate;
-         
-         		return $this;
-         	}
+                  	{
+                  		$this->reservationDate = $reservationDate;
+                  
+                  		return $this;
+                  	}
 
     /**
      * @return Collection|Ticket[]
@@ -179,4 +179,5 @@ class Booking
 
         return $this;
     }
+
 }

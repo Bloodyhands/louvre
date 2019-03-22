@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Form\BookingType;
 use App\Service\Price;
-use App\Service\Log;
+use App\Service\StripeHandler;
+use App\Service\SendEmail;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,15 +75,18 @@ class BookingController extends AbstractController
 	 * @Route("/booking/{id}/successfull", name="successfull")
 	 *
 	 * @param Booking $booking
-	 * @param Log $log
+	 * @param StripeHandler $stripeHandler
+	 * @param SendEmail $sendEmail
 	 *
 	 * @return Response
 	 */
-	public function successfull(Booking $booking, Log $log, LoggerInterface $logger)
+	public function successfull(Booking $booking, StripeHandler $stripeHandler, SendEmail $sendEmail)
 	{
+		$stripeHandler->checkPayment($booking);
+		$sendEmail->mail($booking);
+
 		return $this->render('booking/successfull.html.twig', [
-			'booking' => $booking,
-			'log' => $log->checkPayment($booking, $logger)
+			'booking' => $booking
 		]);
 	}
 }

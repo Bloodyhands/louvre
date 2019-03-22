@@ -21,14 +21,14 @@ class Price
 		$datetime1 = new \DateTime('now');
 		$age = $datetime1->diff($ticket->getBirthdayDate())->y;
 		switch ($age) {
+			case ($age < 4):
+				return 0;
 			case ($age >= 60):
 				return Ticket::SENIOR;
 			case ($age >= 13):
 				return Ticket::NORMAL;
 			case ($age >= 4):
 				return Ticket::CHILDREN;
-			default:
-				return 0;
 		}
 	}
 

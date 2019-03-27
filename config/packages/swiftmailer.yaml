@@ -1,7 +1,6 @@
 swiftmailer:
     url: '%env(MAILER_URL)%'
-    delivery_addresses: ['mathieu_franon@outlook.fr']
-    transport: smtp
-    username: root
-    password: null
+    spool: { type: 'memory' }
+    port: 1025
     host: localhost
+    timeout: 30

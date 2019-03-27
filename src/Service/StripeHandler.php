@@ -33,7 +33,7 @@ class StripeHandler
 		} catch (\Stripe\Error\RateLimit $e) {
 			$this->loggerInterface->error('Too many requests made to the API too quickly');
 		} catch (\Stripe\Error\InvalidRequest $e) {
-			$this->loggerInterface->error('Invalid parameters were supplied to Stripe\'s API');
+			$this->loggerInterface->error('Invalid parameters were supplied to Stripe\'s API: '.$e->getMessage());
 		} catch (\Stripe\Error\Authentication $e) {
 			$this->loggerInterface->error('Authentication with Stripe\'s API failed');
 		} catch (\Stripe\Error\ApiConnection $e) {
@@ -55,8 +55,8 @@ class StripeHandler
 		\Stripe\Charge::create([
 			'amount' => ($booking->getTotalPrice()) * 100,
 			'currency' => 'eur',
-			'source' => $_POST['stripeToken']
-							   ]);
+			'source' => $_POST['stripeToken'],
+		]);
 	}
 
 	/**
@@ -68,7 +68,6 @@ class StripeHandler
 	{
 		\Stripe\Customer::create([
 			"email" => $booking->getEmail(),
-			"source" => $_POST['stripeToken']
-											 ]);
+		]);
 	}
 }

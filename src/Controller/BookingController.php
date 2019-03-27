@@ -82,7 +82,7 @@ class BookingController extends AbstractController
 	 */
 	public function successfull(Booking $booking, StripeHandler $stripeHandler, SendEmail $sendEmail)
 	{
-		$stripeHandler->checkPayment($booking);
+		$stripeHandler->checkPayment($booking);die();
 		$sendEmail->mail($booking);
 
 		return $this->render('booking/successfull.html.twig', [

@@ -42,17 +42,27 @@ h4
     height: 414px;
     width: 600px;
 }
-#contact, #time, #price
+#time, #price
 {
     background-color: #303030;
     margin-top: 120px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 60px;
+    padding-bottom: 120px;
+}
+#contact
+{
+    background-color: #303030;
+    margin-top: 120px;
+    padding-top: 80px;
+    padding-bottom: 180px;
 }
 #booking
 {
-    margin-top: 200px;
+    background-color: #303030;
+    margin-top: 120px;
     margin-bottom: 200px;
+    padding-top: 200px;
+    padding-bottom: 200px;
 }
 #card
 {
@@ -63,6 +73,9 @@ h4
 {
     margin-top: 50px;
     font-size: 20px;
+}
+#bookingButton{
+    font-size: 30px;
 }
 #monBouton
 {

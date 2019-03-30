@@ -64,8 +64,13 @@ class Booking
      */
     private $dayType;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reservationNumber;
+
 	/**
-	 * Callback appelé à chaque fois qu'on crée une nouvelle réseravtion
+	 * Callback appelé à chaque fois qu'on crée une nouvelle réservation
 	 *
 	 * @ORM\PrePersist
 	 *
@@ -126,16 +131,16 @@ class Booking
     }
 
 	public function getReservationDate(): ?\DateTimeInterface
-                  	{
-                  		return $this->reservationDate;
-                  	}
+                           	{
+                           		return $this->reservationDate;
+                           	}
 
 	public function setReservationDate(\DateTimeInterface $reservationDate): self
-                  	{
-                  		$this->reservationDate = $reservationDate;
-                  
-                  		return $this;
-                  	}
+                           	{
+                           		$this->reservationDate = $reservationDate;
+                           
+                           		return $this;
+                           	}
 
     /**
      * @return Collection|Ticket[]
@@ -176,6 +181,18 @@ class Booking
     public function setDayType(bool $dayType): self
     {
         $this->dayType = $dayType;
+
+        return $this;
+    }
+
+    public function getReservationNumber(): ?string
+    {
+        return $this->reservationNumber;
+    }
+
+    public function setReservationNumber(string $reservationNumber): self
+    {
+        $this->reservationNumber = $reservationNumber;
 
         return $this;
     }

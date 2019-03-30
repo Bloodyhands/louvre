@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\BookingType;
 use App\Service\Price;
+use App\Service\RandomString;
 use App\Service\StripeHandler;
 use App\Service\SendEmail;
 use Psr\Log\LoggerInterface;
@@ -22,7 +23,7 @@ class BookingController extends AbstractController
 	/**
 	 * @Route("/booking", name="booking")
 	 */
-	public function reservations(Request $request, ObjectManager $manager, Price $price)//fonction d'accès et de création des réservations
+	public function reservations(Request $request, ObjectManager $manager, Price $price, RandomString $randomString)//fonction d'accès et de création des réservations
 	{
 		$booking = new Booking();
 		$createdAt = new \DateTime();
@@ -38,6 +39,7 @@ class BookingController extends AbstractController
 				$ticket->setPrice($price->calculatePrice($ticket));
 				$booking->setTotalPrice($price->calculateTotalPrice($booking));
 				$booking->getCreatedAt($createdAt);
+				$booking->setReservationNumber($randomString->generateRandomString(8));
 				$manager->persist($ticket);
 			}
 

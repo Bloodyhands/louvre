@@ -12,12 +12,12 @@
 </head>
 <body>
 <div class="container">
-    <div class="row justify-content-center mb-5">
+    <div class="row justify-content-center mb-5 mt-3">
         <div id="logo" class="col-lg-3">
             <img src="{{ asset('93fe383.png') }}" alt="logo_louvre" />
         </div>
         <div class="col-lg-9">
-            <h4>Bonjour, voici l'email de réservation pour le {{ booking.reservationDate|date('d/m/Y') }}</h4>
+            <h4>Bonjour, votre réservation n° {{ booking.reservationNumber }} pour le {{ booking.reservationDate|date('d/m/Y') }}</h4>
         </div>
     </div>
     <div class="row mb-2">

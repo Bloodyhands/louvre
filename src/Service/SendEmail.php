@@ -19,7 +19,7 @@ class SendEmail
 
 	public function mail(Booking $booking)
 	{
-		$message = (new \Swift_Message('Hello email'))
+		$message = (new \Swift_Message('Réservation' .$booking->getReservationNumber()))
 			->setFrom('mathieu_franon@outlook.fr')
 			->setTo($booking->getEmail())
 			->setBody(

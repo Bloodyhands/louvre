@@ -1,2 +1,49 @@
-<h3>Bonjour, voici l'email de confirmation de votre commande {{ booking.id }}</h3>
-<h4>Voici vos tickets :</h4>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="default_blue.css" />
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center mb-5 mt-3">
+        <div id="logo" class="col-lg-3">
+            <img src="{{ asset('93fe383.png') }}" alt="logo_louvre" />
+        </div>
+        <div class="col-lg-9">
+            <h4>Bonjour, votre réservation n° {{ booking.reservationNumber }} pour le {{ booking.reservationDate|date('d/m/Y') }}</h4>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12">
+            <h5>Voici vos tickets :</h5>
+        </div>
+    </div>
+    {% for ticket in booking.tickets %}
+        <div class="row  border border-primary bg-primary text-white pt-3 rounded">
+            <dt class="col-lg-2">Nom/Prénom :</dt>
+            <dd class="col-lg-2">{{ ticket.name|capitalize }} {{ ticket.firstname|capitalize }}</dd>
+            <dt class="col-lg-2">Pays du détenteur :</dt>
+            <dd class="col-lg-1">{{ ticket.country }}</dd>
+            <dt class="col-lg-2">Date de naissance :</dt>
+            <dd class="col-lg-2">{{ ticket.birthdayDate|date('d/m/Y') }}</dd>
+            <dt class="col-lg-2">Tarif réduit :</dt>
+            <dd class="col-lg-5">{% if ticket.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
+            <dt class="col-lg-2">Prix du billet :</dt>
+            <dd class="col-lg-2">{{ ticket.price }} €</dd>
+        </div><br>
+
+    {% endfor %}
+        <div class="row  border border-primary bg-primary text-white pt-3 rounded">
+            <dt class="col-lg-3">Prix total de la réservation :</dt>
+            <dd class="col-lg-2">{{ booking.totalPrice }} €</dd>
+        </div>
+</div>
+
+</body>

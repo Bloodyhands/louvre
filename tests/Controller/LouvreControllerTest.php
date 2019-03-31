@@ -39,13 +39,13 @@ class LouvreControllerTest extends WebTestCase
 	/**
 	 * @group test
 	 */
-	/*public function testFormBooking()
+	public function testFormBooking()
 	{
 		$client = static::createClient();
 		$crawler = $client->request('GET', 'booking');
 
-		$addTicketButton = $crawler->selectLink("add-ticket")->link();
-		$client->click($addTicketButton);
+		$addTicketButton = $crawler->selectButton("add-ticket")->form();dump($addTicketButton);
+		$client->submit($addTicketButton);
 		$form = $crawler->selectButton('Commander')->form();
 		$form['booking[reservationDate]'] = '02/04/2019';
 		$form['booking[email]'] = 'mathieu_franon@outlook.fr';
@@ -61,5 +61,5 @@ class LouvreControllerTest extends WebTestCase
 		$crawler = $client->followRedirect();
 
 		$this->assertEquals(1, $crawler->filter('div.alert.alert-success')->count());
-	}*/
+	}
 }

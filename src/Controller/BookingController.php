@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Form\BookingType;
+use App\Repository\BookingRepository;
 use App\Service\Price;
 use App\Service\RandomString;
 use App\Service\StripeHandler;
 use App\Service\SendEmail;
+use App\Service\ThousandTickets;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +17,6 @@ use App\Entity\Ticket;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class BookingController extends AbstractController
@@ -33,6 +34,18 @@ class BookingController extends AbstractController
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()){
+
+			$reservationDate = $booking->getReservationDate();
+			//$repo = $manager->getRepository(Booking::class)->countTicketsByDay($reservationDate);
+dump($repo);die();
+			if ($repo > 2) {
+				$this->addFlash(
+					'danger',
+					'Trop de tickets'
+				);
+				return $this->render('/booking/booking.html.twig');
+			}
+
 			foreach ($booking->getTickets() as $ticket) {
 				$ticket->setBooking($booking);
 				$booking->addTicket($ticket);

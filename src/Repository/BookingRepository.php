@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Booking;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Query\QueryBuilder;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -12,12 +14,24 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Booking[]    findAll()
  * @method Booking[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OrderRepository extends ServiceEntityRepository
+class BookingRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Booking::class);
     }
+
+    public function countTicketsByDay(\DateTime $reservationDate)
+	{
+		return $this->createQueryBuilder('b, t')
+			->select('COUNT(t.id)')
+			->from('ticket', 't')
+			->join('t.booking_id')
+			->where('reservationDate like :reservationDate')
+			->setParameter('reservationDate', $reservationDate->format('Y-m-d').'%')
+			->getQuery()
+			->getResult();
+	}
 
 //    /**
 //     * @return Booking[] Returns an array of Booking objects

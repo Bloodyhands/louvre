@@ -8,7 +8,6 @@ use App\Service\Price;
 use App\Service\RandomString;
 use App\Service\StripeHandler;
 use App\Service\SendEmail;
-use App\Service\ThousandTickets;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +22,8 @@ class BookingController extends AbstractController
 {
 	/**
 	 * Accès et création des réservations
+	 *
+	 * @Route("/booking", name="booking")
 	 *
 	 * @param Request $request
 	 * @param ObjectManager $manager

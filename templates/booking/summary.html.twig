@@ -42,7 +42,7 @@
                         <dt class="col-lg-6">Tarif réduit :</dt>
                         <dd class="col-lg-6">{% if ticket.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
                         <dt class="col-lg-6">Prix du billet :</dt>
-                        <dd class="col-lg-6">{{ ticket.price }} €</dd>
+                        <dd class="col-lg-6">{% if booking.dayType == true %} {{ ticket.price / 2 }} € {% else %} {{ ticket.price }} {% endif %}</dd>
                     </div>
                 </div>
             </div>

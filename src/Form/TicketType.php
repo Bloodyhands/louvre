@@ -36,7 +36,7 @@ class TicketType extends AbstractType
 						   ], $options);
 	}
 
-	public function buildForm(FormBuilderInterface $builder, array $options)
+	public function buildForm(FormBuilderInterface $builder, array $options) //création du formulaire de ticket
 	{
 		$builder
 			->add('name',

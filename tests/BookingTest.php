@@ -20,6 +20,8 @@ class BookingTest extends TestCase
 	}
 
 	/**
+	 * Test pour voir si les prix sont correct pour un âge donné
+	 *
 	 * @param $reducePrice
 	 * @param $birthdate
 	 * @param $expected

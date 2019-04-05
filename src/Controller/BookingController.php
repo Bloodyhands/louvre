@@ -22,9 +22,16 @@ use Doctrine\Common\Persistence\ObjectManager;
 class BookingController extends AbstractController
 {
 	/**
-	 * @Route("/booking", name="booking")
+	 * Accès et création des réservations
+	 *
+	 * @param Request $request
+	 * @param ObjectManager $manager
+	 * @param Price $price
+	 * @param RandomString $randomString
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+	 * @throws \Exception
 	 */
-	public function reservations(Request $request, ObjectManager $manager, Price $price, RandomString $randomString)//fonction d'accès et de création des réservations
+	public function reservations(Request $request, ObjectManager $manager, Price $price, RandomString $randomString)
 	{
 		$totalTicketsByDay = 1000;
 		$booking = new Booking();
@@ -46,7 +53,6 @@ class BookingController extends AbstractController
 				);
 				return $this->redirectToRoute('booking');
 			}
-
 
 			foreach ($booking->getTickets() as $ticket) {
 				$ticket->setBooking($booking);

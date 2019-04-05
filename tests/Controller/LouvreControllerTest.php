@@ -37,6 +37,8 @@ class LouvreControllerTest extends WebTestCase
 	}
 
 	/**
+	 * Test du formulaire de commande
+	 *
 	 * @group test
 	 */
 	public function testFormBooking()

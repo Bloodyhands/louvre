@@ -17,6 +17,17 @@ class SendEmail
 		$this->template = $templating;
 	}
 
+	/**
+	 * Envoi d'un email de confirmation de commande
+	 *
+	 * @param Booking $booking
+	 * @throws \Twig\Error\LoaderError
+	 * @throws \Twig\Error\RuntimeError
+	 * @throws \Twig\Error\SyntaxError
+	 * @throws \Twig_Error_Loader
+	 * @throws \Twig_Error_Runtime
+	 * @throws \Twig_Error_Syntax
+	 */
 	public function mail(Booking $booking)
 	{
 		$message = (new \Swift_Message('Réservation' .$booking->getReservationNumber()))

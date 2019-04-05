@@ -4,6 +4,14 @@ namespace App\Service;
 
 class RandomString
 {
+	/**
+	 * Création d'un code aléatoire pour avoir un numéro de commande
+	 *
+	 * @param $length
+	 * @param string $list
+	 * @return string
+	 * @throws \Exception
+	 */
 	public function generateRandomString($length, $list = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 	{
 		$string = '';

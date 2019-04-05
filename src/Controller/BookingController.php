@@ -26,6 +26,7 @@ class BookingController extends AbstractController
 	 */
 	public function reservations(Request $request, ObjectManager $manager, Price $price, RandomString $randomString)//fonction d'accès et de création des réservations
 	{
+		$totalTicketsByDay = 1000;
 		$booking = new Booking();
 		$createdAt = new \DateTime();
 
@@ -36,15 +37,16 @@ class BookingController extends AbstractController
 		if ($form->isSubmitted() && $form->isValid()){
 
 			$reservationDate = $booking->getReservationDate();
-			//$repo = $manager->getRepository(Booking::class)->countTicketsByDay($reservationDate);
-dump($repo);die();
-			if ($repo > 2) {
+			$repo = $manager->getRepository(Booking::class)->countTicketsByDay($reservationDate);
+
+			if ($repo > $totalTicketsByDay){
 				$this->addFlash(
-					'danger',
-					'Trop de tickets'
+					'alert',
+					"Le nombre de tickets possible pour cette journée est dépassé, veuillez choisir une autre date de réservation !"
 				);
-				return $this->render('/booking/booking.html.twig');
+				return $this->redirectToRoute('booking');
 			}
+
 
 			foreach ($booking->getTickets() as $ticket) {
 				$ticket->setBooking($booking);

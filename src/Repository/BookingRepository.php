@@ -23,14 +23,13 @@ class BookingRepository extends ServiceEntityRepository
 
     public function countTicketsByDay(\DateTime $reservationDate)
 	{
-		return $this->createQueryBuilder('b, t')
+		return $this->createQueryBuilder('b')
 			->select('COUNT(t.id)')
-			->from('ticket', 't')
-			->join('t.booking_id')
-			->where('reservationDate like :reservationDate')
+			->innerJoin('b.tickets', 't')
+			->where('b.reservationDate LIKE :reservationDate')
 			->setParameter('reservationDate', $reservationDate->format('Y-m-d').'%')
 			->getQuery()
-			->getResult();
+			->getSingleScalarResult();
 	}
 
 //    /**

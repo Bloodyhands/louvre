@@ -11,6 +11,15 @@
 		<div class="col-lg-12 text-center">
 			<h2>Réservations des billets</h2>
 		</div>
+
+		{% for label, messages in app.flashes %}
+			<div class="alert alert-warning">
+				{% for message in messages %}
+					<p>{{ message }}</p>
+				{% endfor %}
+			</div>
+		{% endfor %}
+
 		<div class="row alert alert-secondary">
 			<div class="col-lg-4">
 				{{ form_row(form.reservationDate, {'attr': {'class': 'datepickerBooking'}}) }}

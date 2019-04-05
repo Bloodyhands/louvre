@@ -21,6 +21,13 @@ class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
+	/**
+	 * Compteur de tickets
+	 *
+	 * @param \DateTime $reservationDate
+	 * @return mixed
+	 * @throws \Doctrine\ORM\NonUniqueResultException
+	 */
     public function countTicketsByDay(\DateTime $reservationDate)
 	{
 		return $this->createQueryBuilder('b')

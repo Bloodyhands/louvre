@@ -8,7 +8,7 @@ use App\Entity\Booking;
 class Price
 {
 	/**
-	 * On récupère l'âge des personnes de chaque billet
+	 * On récupère l'âge des personnes de chaque billet pour leur attirbuer un tarif
 	 *
 	 * @param Ticket $ticket
 	 */
@@ -33,7 +33,7 @@ class Price
 	}
 
 	/**
-	 * On récupère le prix total des billets
+	 * On récupère le prix total des billets pour la réservation
 	 *
 	 * @param Booking $booking
 	 */

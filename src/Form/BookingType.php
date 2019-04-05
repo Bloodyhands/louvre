@@ -15,9 +15,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use App\Form\DataTransformer\FrenchToDateTimeTransformer;
 use Symfony\Component\HttpFoundation\Session\Session ;
 
-/*$session = new Session();
-$session->start();*/
-
 class BookingType extends AbstractType
 {
 	public function __construct(FrenchToDateTimeTransformer $transformer)
@@ -42,7 +39,7 @@ class BookingType extends AbstractType
 						   ], $options);
 	}
 
-	public function buildForm(FormBuilderInterface $builder, array $options)
+	public function buildForm(FormBuilderInterface $builder, array $options) //création du formulaire de commande
 	{
 		$builder
 			->add('email',

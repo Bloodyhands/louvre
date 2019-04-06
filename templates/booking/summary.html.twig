@@ -15,14 +15,14 @@
             <div class="card-header text-center">Commande n° {{ booking.reservationNumber }}</div>
             <div class="card-body">
                 <div class="row">
-                    <dt class="col-lg-6">Créée le :</dt>
-                    <dd class="col-lg-6">{{ booking.createdAt|date('d/m/Y') }}</dd>
-                    <dt class="col-lg-6">Email de réception des billets :</dt>
-                    <dd class="col-lg-6">{{ booking.email }}</dd>
-                    <dt class="col-lg-6">Nombre de tickets :</dt>
-                    <dd class="col-lg-6">{{ booking.tickets|length }}</dd>
-                    <dt class="col-lg-6">Date de réservation :</dt>
-                    <dd class="col-lg-6">{{ booking.reservationDate|date('d/m/Y')}}</dd>
+                    <dt class="col-12 col-md-6">Créée le :</dt>
+                    <dd class="col-12 col-md-6">{{ booking.createdAt|date('d/m/Y') }}</dd>
+                    <dt class="col-12 col-md-6">Email de réception des billets :</dt>
+                    <dd class="col-12 col-md-6">{{ booking.email }}</dd>
+                    <dt class="col-12 col-md-6">Nombre de tickets :</dt>
+                    <dd class="col-12 col-md-6">{{ booking.tickets|length }}</dd>
+                    <dt class="col-12 col-md-6">Date de réservation :</dt>
+                    <dd class="col-12 col-md-6">{{ booking.reservationDate|date('d/m/Y')}}</dd>
                 </div>
             </div>
         </div>
@@ -33,16 +33,16 @@
             <div class="card text-white bg-primary mb-3" style="max-width: 40rem;">
                 <div class="card-body">
                     <div class="row">
-                        <dt class="col-lg-6">Nom/Prénom :</dt>
-                        <dd class="col-lg-6">{{ ticket.name|capitalize }} {{ ticket.firstname|capitalize }}</dd>
-                        <dt class="col-lg-6">Pays du détenteur :</dt>
-                        <dd class="col-lg-6">{{ ticket.country }}</dd>
-                        <dt class="col-lg-6">Date de naissance :</dt>
-                        <dd class="col-lg-6">{{ ticket.birthdayDate|date('d/m/Y') }}</dd>
-                        <dt class="col-lg-6">Tarif réduit :</dt>
-                        <dd class="col-lg-6">{% if ticket.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
-                        <dt class="col-lg-6">Prix du billet :</dt>
-                        <dd class="col-lg-6">{% if booking.dayType == true %} {{ ticket.price / 2 }} € {% else %} {{ ticket.price }} {% endif %}</dd>
+                        <dt class="col-12 col-md-6">Nom/Prénom :</dt>
+                        <dd class="col-12 col-md-6">{{ ticket.name|capitalize }} {{ ticket.firstname|capitalize }}</dd>
+                        <dt class="col-12 col-md-6">Pays du détenteur :</dt>
+                        <dd class="col-12 col-md-6">{{ ticket.country }}</dd>
+                        <dt class="col-12 col-md-6">Date de naissance :</dt>
+                        <dd class="col-12 col-md-6">{{ ticket.birthdayDate|date('d/m/Y') }}</dd>
+                        <dt class="col-12 col-md-6">Tarif réduit :</dt>
+                        <dd class="col-12 col-md-6">{% if ticket.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
+                        <dt class="col-12 col-md-6">Prix du billet :</dt>
+                        <dd class="col-12 col-md-6">{% if booking.dayType == true %} {{ ticket.price / 2 }} € {% else %} {{ ticket.price }} {% endif %}</dd>
                     </div>
                 </div>
             </div>
@@ -53,14 +53,14 @@
         <div class="card text-white bg-primary" style="max-width: 40rem;">
             <div class="card-header">
                 <div class="row">
-                    <dt class="col-lg-6">Montant total de la commande :</dt>
-                    <dd class="col-lg-6">{{ booking.totalPrice }} €</dd>
+                    <dt class="col-12 col-md-6">Montant total de la commande :</dt>
+                    <dd class="col-12 col-md-6">{{ booking.totalPrice }} €</dd>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-4 offset-lg-4 text-center mt-5 mb-5">
+    <div class="col-12 offset-0 col-md-4 offset-md-4 text-center mt-5 mb-5">
         <form action="{{ path('successfull', {'id':booking.id}) }}" method="POST">
           <script
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"

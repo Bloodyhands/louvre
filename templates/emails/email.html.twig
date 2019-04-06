@@ -13,10 +13,10 @@
 <body>
 <div class="container">
     <div class="row justify-content-center mb-5 mt-3">
-        <div id="logo" class="col-lg-3">
+        <div id="logo" class="col-12 col-md-3">
             <img src="{{ asset('93fe383.png') }}" alt="logo_louvre" />
         </div>
-        <div class="col-lg-9">
+        <div class="col-12 col-md-9">
             <h4>Bonjour, votre réservation n° {{ booking.reservationNumber }} pour le {{ booking.reservationDate|date('d/m/Y') }}</h4>
         </div>
     </div>
@@ -27,22 +27,22 @@
     </div>
     {% for ticket in booking.tickets %}
         <div class="row  border border-primary bg-primary text-white pt-3 rounded">
-            <dt class="col-lg-2">Nom/Prénom :</dt>
-            <dd class="col-lg-2">{{ ticket.name|capitalize }} {{ ticket.firstname|capitalize }}</dd>
-            <dt class="col-lg-2">Pays du détenteur :</dt>
-            <dd class="col-lg-1">{{ ticket.country }}</dd>
-            <dt class="col-lg-2">Date de naissance :</dt>
-            <dd class="col-lg-2">{{ ticket.birthdayDate|date('d/m/Y') }}</dd>
-            <dt class="col-lg-2">Tarif réduit :</dt>
-            <dd class="col-lg-5">{% if ticket.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
-            <dt class="col-lg-2">Prix du billet :</dt>
-            <dd class="col-lg-2">{{ ticket.price }} €</dd>
+            <dt class="col-12 col-md-2">Nom/Prénom :</dt>
+            <dd class="col-12 col-md-2">{{ ticket.name|capitalize }} {{ ticket.firstname|capitalize }}</dd>
+            <dt class="col-12 col-md-2">Pays du détenteur :</dt>
+            <dd class="col-12 col-md-1">{{ ticket.country }}</dd>
+            <dt class="col-12 col-md-2">Date de naissance :</dt>
+            <dd class="col-12 col-md-2">{{ ticket.birthdayDate|date('d/m/Y') }}</dd>
+            <dt class="col-12 col-md-2">Tarif réduit :</dt>
+            <dd class="col-12 col-md-5">{% if ticket.reducePrice == 1 %} Oui (Veuillez présenter votre justificatif lors de l'entrée) {% else %} Non {% endif %}</dd>
+            <dt class="col-12 col-md-2">Prix du billet :</dt>
+            <dd class="col-12 col-md-2">{{ ticket.price }} €</dd>
         </div><br>
 
     {% endfor %}
         <div class="row  border border-primary bg-primary text-white pt-3 rounded">
-            <dt class="col-lg-3">Prix total de la réservation :</dt>
-            <dd class="col-lg-2">{{ booking.totalPrice }} €</dd>
+            <dt class="col-12 col-md-3">Prix total de la réservation :</dt>
+            <dd class="col-12 col-md-2">{{ booking.totalPrice }} €</dd>
         </div>
 </div>
 

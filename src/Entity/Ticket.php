@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as LouvreAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TicketRepository")
@@ -47,7 +48,7 @@ class Ticket
     /**
      * @ORM\Column(type="datetime")
 	 *
-	 * @Assert\LessThan("today")
+	 * @Assert\LessThanOrEqual("today")
 	 *
      */
     private $birthdayDate;

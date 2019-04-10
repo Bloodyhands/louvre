@@ -43,7 +43,7 @@ class Booking
 	 * @BookingAssert\NoReservationSunday()
 	 * @BookingAssert\NoReservationFirstMay()
 	 * @BookingAssert\NoReservationFirstNovember()
-	 * @BookingAssert\NoReservationTwenTyFiveDecember()
+	 * @BookingAssert\NoReservationTwentyFiveDecember()
 	 *
 	 */
 	private $reservationDate;

@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Form\BookingType;
-use App\Repository\BookingRepository;
+use App\Service\BookingManager;
+use App\Service\FlashMessage;
 use App\Service\Price;
-use App\Service\RandomString;
 use App\Service\StripeHandler;
 use App\Service\SendEmail;
 use Psr\Log\LoggerInterface;
@@ -28,15 +28,12 @@ class BookingController extends AbstractController
 	 * @param Request $request
 	 * @param ObjectManager $manager
 	 * @param Price $price
-	 * @param RandomString $randomString
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
 	 * @throws \Exception
 	 */
-	public function reservations(Request $request, ObjectManager $manager, Price $price, RandomString $randomString)
+	public function reservations(Request $request, ObjectManager $manager, Price $price, BookingManager $bookingManager, FlashMessage $flashMessage)
 	{
-		$totalTicketsByDay = 1000;
 		$booking = new Booking();
-		$createdAt = new \DateTime();
 
 		$form = $this->createForm(BookingType::class, $booking);
 
@@ -44,27 +41,10 @@ class BookingController extends AbstractController
 
 		if ($form->isSubmitted() && $form->isValid()){
 
-			$reservationDate = $booking->getReservationDate();
-			$repo = $manager->getRepository(Booking::class)->countTicketsByDay($reservationDate);
+			$flashMessage->messageForThousandTickets($booking);
 
-			if ($repo > $totalTicketsByDay){
-				$this->addFlash(
-					'alert',
-					"Le nombre de tickets possible pour cette journée est dépassé, veuillez choisir une autre date de réservation !"
-				);
-				return $this->redirectToRoute('booking');
-			}
 
-			foreach ($booking->getTickets() as $ticket) {
-				$ticket->setBooking($booking);
-				$booking->addTicket($ticket);
-				$ticket->setPrice($price->calculatePrice($ticket));
-				$booking->setTotalPrice($price->calculateTotalPrice($booking));
-				$booking->getCreatedAt($createdAt);
-				$booking->setReservationNumber($randomString->generateRandomString(8));
-				$manager->persist($ticket);
-			}
-
+			$bookingManager->persistTickets($booking);
 			$manager->persist($booking);
 			$manager->flush();
 

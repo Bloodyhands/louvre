@@ -16,7 +16,7 @@ class FlashMessage extends AbstractController
 
 	public function messageForThousandTickets(Booking $booking)
 	{
-		$totalTicketsByDay = 2;
+		$totalTicketsByDay = 1000;
 
 		$reservationDate = $booking->getReservationDate();
 		$repo = $this->manager->getRepository(Booking::class)->countTicketsByDay($reservationDate);
@@ -26,7 +26,7 @@ class FlashMessage extends AbstractController
 				'alert',
 				"Le nombre de tickets possible pour cette journée est dépassé, veuillez choisir une autre date de réservation !"
 			);
-			return $this->redirectToRoute('booking');
+			return true;
 		}
 	}
 }

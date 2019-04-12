@@ -40,16 +40,15 @@ class BookingController extends AbstractController
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()){
-
-			$flashMessage->messageForThousandTickets($booking);
-
+			if ($flashMessage->messageForThousandTickets($booking) == true) {
+				return $this->redirectToRoute('booking');
+			}
 
 			$bookingManager->persistTickets($booking);
 			$manager->persist($booking);
 			$manager->flush();
 
 			return $this->redirectToRoute('summary', ['id' => $booking->getId()]);
-
 		}
 		return $this->render('booking/booking.html.twig', array(
 			'form' => $form->createView(),

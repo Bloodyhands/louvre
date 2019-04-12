@@ -7,9 +7,12 @@
         "ext-iconv": "*",
         "phpunit/phpunit": "^7.5",
         "sensio/framework-extra-bundle": "^5.1",
+        "sensiolabs/security-checker": "^5.0",
         "stripe/stripe-php": "^6.30",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "*",
         "symfony/console": "*",
+        "symfony/dotenv": "4.1.*",
         "symfony/expression-language": "*",
         "symfony/finder": "*",
         "symfony/flex": "^1.1",
@@ -30,7 +33,6 @@
         "symfony/browser-kit": "*",
         "symfony/css-selector": "*",
         "symfony/debug-pack": "*",
-        "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "*",
         "symfony/profiler-pack": "*",
@@ -64,7 +66,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "security-checker security:check": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Validator as BookingAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
@@ -15,6 +16,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Booking
 {
+	const TOTAL_TICKETS_DAY = 1000;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -37,7 +40,12 @@ class Booking
 	 * @ORM\Column(type="datetime")
 	 *
 	 * @Assert\NotNull
-	 * @Assert\GreaterThan("today", message="La date de réservation est antérieure à aujourd'hui")
+	 * @Assert\GreaterThanOrEqual("today", message="La date de réservation est antérieure à aujourd'hui")
+	 * @BookingAssert\NoReservationTuesday()
+	 * @BookingAssert\NoReservationSunday()
+	 * @BookingAssert\NoReservationFirstMay()
+	 * @BookingAssert\NoReservationFirstNovember()
+	 * @BookingAssert\NoReservationTwentyFiveDecember()
 	 *
 	 */
 	private $reservationDate;

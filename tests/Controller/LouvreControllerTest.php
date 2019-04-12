@@ -41,7 +41,7 @@ class LouvreControllerTest extends WebTestCase
 	 *
 	 * @group test
 	 */
-	public function testFormBooking()
+	/*public function testFormBooking()
 	{
 		$client = static::createClient();
 		$crawler = $client->request('GET', 'booking');
@@ -63,5 +63,5 @@ class LouvreControllerTest extends WebTestCase
 		$crawler = $client->followRedirect();
 
 		$this->assertEquals(1, $crawler->filter('div.alert.alert-success')->count());
-	}
+	}*/
 }

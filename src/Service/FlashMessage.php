@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Booking;
-use App\Repository\BookingRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -16,17 +15,18 @@ class FlashMessage extends AbstractController
 
 	public function messageForThousandTickets(Booking $booking)
 	{
-		$totalTicketsByDay = 1000;
-
 		$reservationDate = $booking->getReservationDate();
 		$repo = $this->manager->getRepository(Booking::class)->countTicketsByDay($reservationDate);
 
-		if ($repo > $totalTicketsByDay){
+		if ($repo > Booking::TOTAL_TICKETS_DAY){
 			$this->addFlash(
 				'alert',
 				"Le nombre de tickets possible pour cette journée est dépassé, veuillez choisir une autre date de réservation !"
 			);
+
 			return true;
 		}
+
+		return false;
 	}
 }

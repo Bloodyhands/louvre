@@ -16,6 +16,8 @@ use App\Validator as BookingAssert;
  */
 class Booking
 {
+	const TOTAL_TICKETS_DAY = 1000;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
